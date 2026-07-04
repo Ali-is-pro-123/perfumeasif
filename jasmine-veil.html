@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jasmine Veil | Aurele Parfum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="inner-page">
+    <div class="announcement-bar">
+      <span>Complimentary shipping over $90</span>
+      <span>Discovery set included with every full bottle</span>
+    </div>
+
+    <header class="site-header is-scrolled">
+      <a class="brand" href="index.html" aria-label="Aurele home">
+        <span class="brand-mark">A</span>
+        <span>Aurele</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a class="active" href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button cart-button" type="button" aria-label="Open bag">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M6.5 8.5h11l-.8 10.2a2 2 0 0 1-2 1.8H9.3a2 2 0 0 1-2-1.8L6.5 8.5Z" />
+          <path d="M9 8.5a3 3 0 0 1 6 0" />
+        </svg>
+        <span class="bag-count">0</span>
+      </button>
+    </header>
+
+    <main class="page-main">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="products.html">Products</a>
+        <span>/</span>
+        <span>Jasmine Veil</span>
+      </nav>
+
+      <section class="product-detail" data-product="Jasmine Veil">
+        <div class="detail-gallery">
+          <div class="detail-image">
+            <span class="bottle bottle-rose"><span></span></span>
+          </div>
+          <div class="detail-thumbs">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="detail-copy">
+          <p class="eyebrow">Floral amber extrait</p>
+          <h1>Jasmine Veil</h1>
+          <p class="detail-price">$128</p>
+          <p class="detail-description">
+            A luminous floral amber built with night jasmine, bergamot peel, and warm skin musk. Polished, modern, and
+            made for evening wear that stays close.
+          </p>
+
+          <div class="option-group" aria-label="Choose size">
+            <button class="selected" type="button">50 ml</button>
+            <button type="button">100 ml</button>
+            <button type="button">Refill</button>
+          </div>
+
+          <button class="wide-button add-button-detail" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M6.5 8.5h11l-.8 10.2a2 2 0 0 1-2 1.8H9.3a2 2 0 0 1-2-1.8L6.5 8.5Z" />
+              <path d="M9 8.5a3 3 0 0 1 6 0" />
+            </svg>
+            <span>Add to bag</span>
+          </button>
+
+          <div class="detail-accordion">
+            <details open>
+              <summary>Fragrance notes</summary>
+              <p>Top: bergamot peel. Heart: night jasmine. Base: amber musk.</p>
+            </details>
+            <details>
+              <summary>How it wears</summary>
+              <p>Bright for the first hour, soft floral through the heart, and warm amber on drydown.</p>
+            </details>
+            <details>
+              <summary>Shipping and returns</summary>
+              <p>Ships in 2 business days. Try the sample first before opening the full bottle.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell slim">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Complete the wardrobe</p>
+            <h2>You may also like</h2>
+          </div>
+        </div>
+        <div class="product-grid">
+          <article class="product-card" data-product="Cedar Bloom">
+            <span class="product-badge">New</span>
+            <a class="product-media" href="products.html" aria-label="View Cedar Bloom">
+              <span class="bottle bottle-green"><span></span></span>
+            </a>
+            <div class="product-info">
+              <p>Green woods</p>
+              <h3><a href="products.html">Cedar Bloom</a></h3>
+              <span>Violet leaf, cedar, salted fig</span>
+            </div>
+            <div class="product-footer">
+              <strong>$142</strong>
+              <span>50 ml</span>
+              <button type="button" class="add-button" aria-label="Add Cedar Bloom to bag">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M12 5v14" />
+                  <path d="M5 12h14" />
+                </svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-product="Nocturne Skin">
+            <span class="product-badge">Evening</span>
+            <a class="product-media" href="products.html" aria-label="View Nocturne Skin">
+              <span class="bottle bottle-amber"><span></span></span>
+            </a>
+            <div class="product-info">
+              <p>Soft spice</p>
+              <h3><a href="products.html">Nocturne Skin</a></h3>
+              <span>Cardamom, suede, vanilla resin</span>
+            </div>
+            <div class="product-footer">
+              <strong>$156</strong>
+              <span>50 ml</span>
+              <button type="button" class="add-button" aria-label="Add Nocturne Skin to bag">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M12 5v14" />
+                  <path d="M5 12h14" />
+                </svg>
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="footer-logo" href="index.html">
+            <span class="brand-mark">A</span>
+            <span>Aurele</span>
+          </a>
+          <p>
+            Fine fragrance house creating modern extrait perfumes with luminous florals, polished amber, and textured
+            woods.
+          </p>
+          <div class="footer-social" aria-label="Social links">
+            <a href="contact.html">IG</a>
+            <a href="contact.html">TK</a>
+            <a href="contact.html">PT</a>
+          </div>
+        </div>
+        <nav class="footer-column" aria-label="Shop links">
+          <strong>Shop</strong>
+          <a href="products.html">All products</a>
+          <a href="jasmine-veil.html">Bestseller</a>
+          <a href="products.html">Discovery set</a>
+          <a href="products.html">Gift cards</a>
+        </nav>
+        <nav class="footer-column" aria-label="Company links">
+          <strong>Company</strong>
+          <a href="about.html">About Aurele</a>
+          <a href="contact.html">Contact</a>
+          <a href="contact.html">Wholesale</a>
+          <a href="contact.html">Stockists</a>
+        </nav>
+        <div class="footer-column">
+          <strong>Customer care</strong>
+          <span>care@aureleparfum.com</span>
+          <span>Monday to Friday</span>
+          <span>10:00 - 18:00</span>
+          <span>Ships in 2 business days</span>
+        </div>
+        <div class="footer-newsletter">
+          <strong>Join the private list</strong>
+          <p>Get early access to launches, refill drops, and seasonal discovery edits.</p>
+          <form class="footer-form" aria-label="Footer newsletter signup">
+            <input name="email" type="email" placeholder="Email address" required />
+            <button type="submit">Join</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>2026 Aurele Parfum. All rights reserved.</span>
+        <nav aria-label="Legal links">
+          <a href="contact.html">Privacy</a>
+          <a href="contact.html">Terms</a>
+          <a href="contact.html">Shipping</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
