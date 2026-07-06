@@ -104,6 +104,14 @@ svg {
   text-transform: uppercase;
 }
 
+.brand-logo {
+  display: block;
+  width: clamp(250px, 12vw, 320px);
+  height: 65px;
+  object-fit: contain;
+  object-position: left center;
+}
+
 .brand-mark {
   display: grid;
   width: 32px;
@@ -113,6 +121,43 @@ svg {
   border-radius: 50%;
   font-family: "Playfair Display", Georgia, serif;
   letter-spacing: 0;
+}
+
+.admin-secret-trigger {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  justify-self: end;
+  border: 1px solid rgba(255, 250, 242, 0.18);
+  border-radius: 50%;
+  color: rgba(255, 250, 242, 0.58);
+  background: rgba(255, 250, 242, 0.06);
+  opacity: 0.72;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, opacity 180ms ease;
+}
+
+.admin-secret-trigger svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.admin-secret-trigger:hover {
+  border-color: rgba(255, 250, 242, 0.42);
+  color: var(--white);
+  background: rgba(255, 250, 242, 0.12);
+  opacity: 1;
+}
+
+.admin-secret-trigger:focus-visible {
+  opacity: 1;
+  outline: 2px solid rgba(255, 250, 242, 0.5);
+  outline-offset: 4px;
 }
 
 .nav-links {
@@ -186,7 +231,7 @@ svg {
 }
 
 .home-hero-media {
-  background-image: url("assets/hero-perfume.png");
+  background-image: url("assets/brand-09.jpeg");
   background-position: center;
   background-size: cover;
   transform: scale(1.01);
@@ -366,7 +411,7 @@ h3 {
   border-radius: 8px;
   background:
     linear-gradient(90deg, rgba(21, 19, 19, 0.06), rgba(21, 19, 19, 0.2)),
-    url("assets/hero-perfume.png") center / cover;
+    url("assets/brand-07.jpeg") center / cover;
   box-shadow: var(--shadow);
 }
 
@@ -510,6 +555,16 @@ h3 {
   overflow: hidden;
   border-radius: 6px;
   background: var(--white);
+}
+
+.product-media img,
+.detail-image img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .bottle {
@@ -778,19 +833,19 @@ h3 {
   min-height: 210px;
   background:
     linear-gradient(180deg, rgba(21, 19, 19, 0.02), rgba(21, 19, 19, 0.18)),
-    url("assets/hero-perfume.png") 64% center / cover;
+    var(--card-image, url("assets/brand-01.jpeg")) center / cover;
 }
 
 .slider-card-green::before {
   background:
     linear-gradient(180deg, rgba(21, 19, 19, 0.02), rgba(21, 19, 19, 0.18)),
-    url("assets/hero-perfume.png") 78% center / cover;
+    var(--card-image, url("assets/brand-02.jpeg")) center / cover;
 }
 
 .slider-card-dark::before {
   background:
     linear-gradient(180deg, rgba(21, 19, 19, 0.02), rgba(21, 19, 19, 0.18)),
-    url("assets/hero-perfume.png") 86% center / cover;
+    var(--card-image, url("assets/brand-03.jpeg")) center / cover;
 }
 
 .slider-badge {
@@ -900,7 +955,7 @@ h3 {
   border-radius: 8px;
   background:
     linear-gradient(90deg, rgba(21, 19, 19, 0.05), rgba(21, 19, 19, 0.35)),
-    url("assets/hero-perfume.png") center / cover;
+    url("assets/brand-08.jpeg") center / cover;
   box-shadow: var(--shadow);
 }
 
@@ -1215,7 +1270,7 @@ h3 {
 
 .footer-main {
   display: grid;
-  grid-template-columns: minmax(260px, 1.25fr) repeat(3, minmax(140px, 0.6fr)) minmax(280px, 1fr);
+  grid-template-columns: minmax(260px, 1.35fr) repeat(3, minmax(140px, 0.7fr));
   gap: clamp(28px, 5vw, 60px);
   padding: clamp(56px, 8vw, 92px) clamp(18px, 5vw, 72px);
 }
@@ -1235,6 +1290,14 @@ h3 {
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.footer-logo-image {
+  display: block;
+  width: min(260px, 74vw);
+  height: 150px;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .footer-logo .brand-mark {
@@ -1357,7 +1420,7 @@ h3 {
   border-radius: 6px;
   background:
     linear-gradient(180deg, rgba(21, 19, 19, 0.02), rgba(21, 19, 19, 0.26)),
-    url("assets/hero-perfume.png") center / cover;
+    url("assets/brand-01.jpeg") center / cover;
   transform: scale(1.01);
 }
 
@@ -2216,19 +2279,19 @@ body {
 .slider-card-citrus::before {
   background:
     linear-gradient(180deg, rgba(21, 19, 19, 0.02), rgba(21, 19, 19, 0.18)),
-    url("assets/hero-perfume.png") 90% center / cover;
+    var(--card-image, url("assets/brand-04.jpeg")) center / cover;
 }
 
 .slider-card-linen::before {
   background:
     linear-gradient(180deg, rgba(21, 19, 19, 0.02), rgba(21, 19, 19, 0.18)),
-    url("assets/hero-perfume.png") 52% center / cover;
+    var(--card-image, url("assets/brand-05.jpeg")) center / cover;
 }
 
 .slider-card-set::before {
   background:
     linear-gradient(180deg, rgba(21, 19, 19, 0.02), rgba(21, 19, 19, 0.18)),
-    url("assets/hero-perfume.png") 72% center / cover;
+    var(--card-image, url("assets/brand-06.jpeg")) center / cover;
 }
 
 .slider-card-footer {
@@ -2265,7 +2328,7 @@ body {
   }
 
   .footer-main {
-    grid-template-columns: 1.2fr 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
