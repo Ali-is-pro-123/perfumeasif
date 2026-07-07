@@ -27,6 +27,7 @@
         <a class="{{ request()->routeIs('products*') ? 'active' : '' }}" href="{{ route('products') }}">Products</a>
         <a class="{{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
         <a class="{{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
+        <a class="{{ request()->routeIs('cart') ? 'active' : '' }}" href="{{ route('cart') }}">Cart ({{ array_sum(session('cart', [])) }})</a>
       </nav>
       <a class="admin-secret-trigger" href="{{ route('admin.login') }}" aria-label="Secure access" title="Secure access">
         <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -35,6 +36,10 @@
         </svg>
       </a>
     </header>
+
+    @if(session('success'))
+      <div class="site-flash">{{ session('success') }}</div>
+    @endif
 
     @yield('content')
 

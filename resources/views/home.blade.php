@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('title', 'Aurele Parfum | Fine Fragrance House')
+@section('title', 'Aurele Perfume | Fine Fragrance House')
 
 @section('content')
 <main>
@@ -9,7 +9,7 @@
     <div class="home-hero-overlay"></div>
     <div class="home-hero-content">
       <p class="eyebrow">Small-batch fine fragrance</p>
-      <h1>Aurele Parfum</h1>
+      <h1>Aurele Perfume</h1>
       <p>Modern extrait perfumes built around luminous florals, mineral amber, and textured woods.</p>
       <div class="hero-actions">
         <a class="primary-action" href="{{ route('products') }}">

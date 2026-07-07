@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class AdminController extends Controller
     {
         return view('admin.dashboard', [
             'productsCount' => Product::count(),
+            'categoriesCount' => Category::count(),
             'messagesCount' => ContactMessage::count(),
             'unreadMessages' => ContactMessage::where('is_read', false)->count(),
             'latestMessages' => ContactMessage::latest()->take(5)->get(),
@@ -30,7 +32,10 @@ class AdminController extends Controller
 
     public function createProduct(): View
     {
-        return view('admin.products.form', ['product' => new Product()]);
+        return view('admin.products.form', [
+            'product' => new Product(),
+            'categories' => Category::orderBy('sort_order')->get(),
+        ]);
     }
 
     public function storeProduct(Request $request): RedirectResponse
@@ -42,7 +47,10 @@ class AdminController extends Controller
 
     public function editProduct(Product $product): View
     {
-        return view('admin.products.form', compact('product'));
+        return view('admin.products.form', [
+            'product' => $product,
+            'categories' => Category::orderBy('sort_order')->get(),
+        ]);
     }
 
     public function updateProduct(Request $request, Product $product): RedirectResponse
@@ -68,11 +76,50 @@ class AdminController extends Controller
         ]);
     }
 
+    public function categories(): View
+    {
+        return view('admin.categories.index', [
+            'categories' => Category::withCount('products')->orderBy('sort_order')->get(),
+        ]);
+    }
+
+    public function createCategory(): View
+    {
+        return view('admin.categories.form', ['category' => new Category()]);
+    }
+
+    public function storeCategory(Request $request): RedirectResponse
+    {
+        Category::create($this->categoryData($request));
+
+        return redirect()->route('admin.categories')->with('success', 'Category created.');
+    }
+
+    public function editCategory(Category $category): View
+    {
+        return view('admin.categories.form', compact('category'));
+    }
+
+    public function updateCategory(Request $request, Category $category): RedirectResponse
+    {
+        $category->update($this->categoryData($request, $category));
+
+        return redirect()->route('admin.categories')->with('success', 'Category updated.');
+    }
+
+    public function deleteCategory(Category $category): RedirectResponse
+    {
+        $category->delete();
+
+        return redirect()->route('admin.categories')->with('success', 'Category deleted.');
+    }
+
     private function productData(Request $request, ?Product $product = null): array
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255'],
+            'category_id' => ['nullable', 'exists:categories,id'],
             'category' => ['nullable', 'string', 'max:255'],
             'badge' => ['nullable', 'string', 'max:255'],
             'notes' => ['nullable', 'string', 'max:255'],
@@ -86,9 +133,28 @@ class AdminController extends Controller
         ]);
 
         $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
+        if (! empty($data['category_id'])) {
+            $data['category'] = Category::find($data['category_id'])?->name ?: $data['category'];
+        }
         $data['image'] = $data['image'] ?: ($product?->image ?: 'assets/brand-01.jpeg');
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_carousel'] = $request->boolean('is_carousel');
+
+        return $data;
+    }
+
+    private function categoryData(Request $request, ?Category $category = null): array
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'sort_order' => ['required', 'integer', 'min:0'],
+            'is_active' => ['nullable', 'boolean'],
+        ]);
+
+        $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
+        $data['is_active'] = $request->boolean('is_active');
 
         return $data;
     }

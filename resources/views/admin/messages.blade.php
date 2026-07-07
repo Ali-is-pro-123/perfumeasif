@@ -12,8 +12,11 @@
   @forelse($messages as $message)
     <div class="card message-card">
       <h3><span>{{ $message->name }}</span><small>{{ $message->created_at->format('M d, Y h:i A') }}</small></h3>
-      <p>{{ $message->message }}</p>
       <small class="muted">{{ $message->email }}</small>
+      @if($message->address)
+        <p><strong>Address:</strong> {{ $message->address }}</p>
+      @endif
+      <p>{{ $message->message }}</p>
     </div>
   @empty
     <div class="card empty">No messages yet.</div>

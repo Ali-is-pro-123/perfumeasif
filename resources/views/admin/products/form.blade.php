@@ -14,7 +14,14 @@
   <div class="form-grid">
     <label>Name<input name="name" value="{{ old('name', $product->name) }}" required></label>
     <label>Slug<input name="slug" value="{{ old('slug', $product->slug) }}"></label>
-    <label>Category<input name="category" value="{{ old('category', $product->category) }}"></label>
+    <label>Category
+      <select name="category_id">
+        <option value="">Select category</option>
+        @foreach($categories as $category)
+          <option value="{{ $category->id }}" {{ (int) old('category_id', $product->category_id) === $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+        @endforeach
+      </select>
+    </label>
     <label>Badge<input name="badge" value="{{ old('badge', $product->badge) }}"></label>
     <label class="full">Notes<input name="notes" value="{{ old('notes', $product->notes) }}"></label>
     <label class="full">Description<textarea name="description">{{ old('description', $product->description) }}</textarea></label>

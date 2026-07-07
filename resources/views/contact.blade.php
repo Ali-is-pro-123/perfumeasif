@@ -23,6 +23,7 @@
       @if(session('success'))<p class="form-status">{{ session('success') }}</p>@endif
       <label>Name<input name="name" type="text" placeholder="Your name" required /></label>
       <label>Email<input name="email" type="email" placeholder="you@example.com" required /></label>
+      <label>Address<input name="address" type="text" placeholder="Street, city, country" required /></label>
       <label>Message<textarea name="message" rows="6" placeholder="How can we help?" required></textarea></label>
       <button class="wide-button" type="submit">Send message</button>
     </form>

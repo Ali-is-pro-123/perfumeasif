@@ -12,10 +12,10 @@
   <section class="shop-layout">
     <aside class="shop-sidebar" aria-label="Product categories">
       <strong>Categories</strong>
-      <a class="active" href="{{ route('products') }}">All fragrance</a>
-      <a href="{{ route('products') }}">Floral</a>
-      <a href="{{ route('products') }}">Woods</a>
-      <a href="{{ route('products') }}">Amber</a>
+      <a class="{{ $activeCategory ? '' : 'active' }}" href="{{ route('products') }}">All fragrance</a>
+      @foreach($categories as $category)
+        <a class="{{ $activeCategory === $category->slug ? 'active' : '' }}" href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+      @endforeach
     </aside>
     <div>
       <div class="shop-toolbar"><span>{{ $products->count() }} products - Ships in 2 business days</span></div>

@@ -13,6 +13,7 @@
 </div>
 <div class="grid">
   <div class="card stat-card"><span>Products</span><strong>{{ $productsCount }}</strong><p>Total perfumes in catalog</p></div>
+  <div class="card stat-card"><span>Categories</span><strong>{{ $categoriesCount }}</strong><p>Dynamic shop categories</p></div>
   <div class="card stat-card"><span>Messages</span><strong>{{ $messagesCount }}</strong><p>Customer inquiries received</p></div>
   <div class="card stat-card"><span>Unread</span><strong>{{ $unreadMessages }}</strong><p>Needs admin attention</p></div>
 </div>
@@ -37,6 +38,7 @@
     <h2>Quick actions</h2>
     <div class="quick-list">
       <a href="{{ route('admin.products.create') }}"><strong>Add new perfume</strong><span>+</span></a>
+      <a href="{{ route('admin.categories.create') }}"><strong>Add new category</strong><span>+</span></a>
       <a href="{{ route('admin.products') }}"><strong>Edit product images</strong><span>→</span></a>
       <a href="{{ route('admin.messages') }}"><strong>Read messages</strong><span>→</span></a>
     </div>
