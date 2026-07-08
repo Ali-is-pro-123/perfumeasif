@@ -1,10 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
-
-define('LARAVEL_START', microtime(true));
-
 if (($_ENV['VERCEL'] ?? getenv('VERCEL')) || ($_ENV['APP_ENV'] ?? getenv('APP_ENV')) === false) {
     $defaults = [
         'APP_NAME' => 'Asif Raza Perfumes',
@@ -19,6 +14,11 @@ if (($_ENV['VERCEL'] ?? getenv('VERCEL')) || ($_ENV['APP_ENV'] ?? getenv('APP_EN
         'LOG_CHANNEL' => 'stderr',
         'QUEUE_CONNECTION' => 'sync',
         'VIEW_COMPILED_PATH' => '/tmp/laravel-views',
+        'APP_SERVICES_CACHE' => '/tmp/laravel-cache/services.php',
+        'APP_PACKAGES_CACHE' => '/tmp/laravel-cache/packages.php',
+        'APP_CONFIG_CACHE' => '/tmp/laravel-cache/config.php',
+        'APP_ROUTES_CACHE' => '/tmp/laravel-cache/routes.php',
+        'APP_EVENTS_CACHE' => '/tmp/laravel-cache/events.php',
     ];
 
     foreach ($defaults as $key => $value) {
@@ -30,7 +30,7 @@ if (($_ENV['VERCEL'] ?? getenv('VERCEL')) || ($_ENV['APP_ENV'] ?? getenv('APP_EN
     }
 }
 
-foreach (['/tmp/laravel-views', '/tmp/laravel-cache', '/tmp/laravel-sessions'] as $directory) {
+foreach (['/tmp/laravel-views', '/tmp/laravel-cache', '/tmp/laravel-sessions', '/tmp/laravel-storage/framework/cache/data'] as $directory) {
     if (! is_dir($directory)) {
         mkdir($directory, 0777, true);
     }
@@ -39,15 +39,4 @@ foreach (['/tmp/laravel-views', '/tmp/laravel-cache', '/tmp/laravel-sessions'] a
 $_SERVER['SCRIPT_NAME'] = '/index.php';
 $_SERVER['SCRIPT_FILENAME'] = __DIR__.'/../public/index.php';
 
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
-    require $maintenance;
-}
-
-require __DIR__.'/../vendor/autoload.php';
-
-/** @var Application $app */
-$app = require_once __DIR__.'/../bootstrap/app.php';
-
-$app->useStoragePath('/tmp/laravel-storage');
-
-$app->handleRequest(Request::capture());
+require __DIR__.'/../public/index.php';
