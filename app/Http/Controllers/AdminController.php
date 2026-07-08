@@ -9,63 +9,38 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Throwable;
 
 class AdminController extends Controller
 {
     public function dashboard(): View
     {
-        try {
-            return view('admin.dashboard', [
-                'productsCount' => Product::count(),
-                'categoriesCount' => Category::count(),
-                'messagesCount' => ContactMessage::count(),
-                'unreadMessages' => ContactMessage::where('is_read', false)->count(),
-                'latestMessages' => ContactMessage::latest()->take(5)->get(),
-            ]);
-        } catch (Throwable) {
-            return view('admin.dashboard', [
-                'productsCount' => 6,
-                'categoriesCount' => 4,
-                'messagesCount' => 0,
-                'unreadMessages' => 0,
-                'latestMessages' => collect(),
-            ]);
-        }
+        return view('admin.dashboard', [
+            'productsCount' => Product::count(),
+            'categoriesCount' => Category::count(),
+            'messagesCount' => ContactMessage::count(),
+            'unreadMessages' => ContactMessage::where('is_read', false)->count(),
+            'latestMessages' => ContactMessage::latest()->take(5)->get(),
+        ]);
     }
 
     public function products(): View
     {
-        try {
-            $products = Product::orderBy('sort_order')->get();
-        } catch (Throwable) {
-            $products = $this->demoProducts();
-        }
-
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', [
+            'products' => Product::orderBy('sort_order')->get(),
+        ]);
     }
 
     public function createProduct(): View
     {
-        try {
-            $categories = Category::orderBy('sort_order')->get();
-        } catch (Throwable) {
-            $categories = $this->demoCategories();
-        }
-
         return view('admin.products.form', [
             'product' => new Product(),
-            'categories' => $categories,
+            'categories' => Category::orderBy('sort_order')->get(),
         ]);
     }
 
     public function storeProduct(Request $request): RedirectResponse
     {
-        try {
-            Product::create($this->productData($request));
-        } catch (Throwable) {
-            return redirect()->route('admin.products')->with('success', 'Demo mode: product changes are not saved on Vercel.');
-        }
+        Product::create($this->productData($request));
 
         return redirect()->route('admin.products')->with('success', 'Product created.');
     }
@@ -94,26 +69,18 @@ class AdminController extends Controller
 
     public function messages(): View
     {
-        try {
-            ContactMessage::where('is_read', false)->update(['is_read' => true]);
+        ContactMessage::where('is_read', false)->update(['is_read' => true]);
 
-            $messages = ContactMessage::latest()->get();
-        } catch (Throwable) {
-            $messages = collect();
-        }
-
-        return view('admin.messages', compact('messages'));
+        return view('admin.messages', [
+            'messages' => ContactMessage::latest()->get(),
+        ]);
     }
 
     public function categories(): View
     {
-        try {
-            $categories = Category::withCount('products')->orderBy('sort_order')->get();
-        } catch (Throwable) {
-            $categories = $this->demoCategories();
-        }
-
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.index', [
+            'categories' => Category::withCount('products')->orderBy('sort_order')->get(),
+        ]);
     }
 
     public function createCategory(): View
@@ -190,41 +157,5 @@ class AdminController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         return $data;
-    }
-
-    private function demoProducts()
-    {
-        return collect([
-            $this->demoProduct('Jasmine Veil', 'Floral', 'Bestseller', 118),
-            $this->demoProduct('Cedar Bloom', 'Fresh', 'New arrival', 104),
-            $this->demoProduct('Nocturne Skin', 'Evening', 'Evening', 132),
-        ]);
-    }
-
-    private function demoProduct(string $name, string $category, string $badge, int $price): Product
-    {
-        return Product::make([
-            'name' => $name,
-            'slug' => Str::slug($name),
-            'category' => $category,
-            'badge' => $badge,
-            'notes' => 'Demo fragrance notes',
-            'description' => 'Demo product visible while Vercel database writes are unavailable.',
-            'image' => 'assets/hero-perfume.png',
-            'price' => $price,
-            'size' => '50 ml',
-            'sort_order' => 1,
-            'is_featured' => true,
-            'is_carousel' => true,
-        ]);
-    }
-
-    private function demoCategories()
-    {
-        return collect([
-            (object) ['id' => 1, 'name' => 'Floral', 'slug' => 'floral', 'description' => 'Demo category', 'sort_order' => 1, 'is_active' => true, 'products_count' => 2],
-            (object) ['id' => 2, 'name' => 'Fresh', 'slug' => 'fresh', 'description' => 'Demo category', 'sort_order' => 2, 'is_active' => true, 'products_count' => 2],
-            (object) ['id' => 3, 'name' => 'Evening', 'slug' => 'evening', 'description' => 'Demo category', 'sort_order' => 3, 'is_active' => true, 'products_count' => 1],
-        ]);
     }
 }
