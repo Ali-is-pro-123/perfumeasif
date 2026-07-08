@@ -41,30 +41,82 @@ $_SERVER['SCRIPT_NAME'] = '/index.php';
 $_SERVER['SCRIPT_FILENAME'] = __DIR__.'/../public/index.php';
 
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+$adminEmail = $_ENV['ADMIN_EMAIL'] ?? getenv('ADMIN_EMAIL') ?: 'admin@perfume.test';
+$adminPassword = $_ENV['ADMIN_PASSWORD'] ?? getenv('ADMIN_PASSWORD') ?: 'admin12345';
+$adminSecret = $_ENV['APP_KEY'] ?? getenv('APP_KEY') ?: 'asif-raza-perfumes';
+$adminCookie = 'asif_admin_auth';
+$adminCookieValue = hash_hmac('sha256', $adminEmail, $adminSecret);
+$isAdminAuthed = hash_equals($adminCookieValue, $_COOKIE[$adminCookie] ?? '');
 
 if ($path === '/admin/login') {
+    $loginError = '';
+
+    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+        $email = trim($_POST['email'] ?? '');
+        $password = (string) ($_POST['password'] ?? '');
+
+        if (hash_equals($adminEmail, $email) && hash_equals($adminPassword, $password)) {
+            setcookie($adminCookie, $adminCookieValue, [
+                'expires' => time() + 60 * 60 * 8,
+                'path' => '/',
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'Lax',
+            ]);
+
+            header('Location: /admin', true, 303);
+            return;
+        }
+
+        $loginError = '<p class="error">Email ya password ghalat hai.</p>';
+    }
+
     header('Content-Type: text/html; charset=UTF-8');
-    echo <<<'HTML'
+    echo str_replace(['{{ERROR}}', '{{EMAIL}}'], [$loginError, htmlspecialchars($adminEmail, ENT_QUOTES, 'UTF-8')], <<<'HTML'
 <!DOCTYPE html>
 <html lang="en">
   <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Login</title>
-    <style>body{min-height:100vh;margin:0;display:grid;place-items:center;background:#171313;font-family:Arial,sans-serif}.box{width:min(420px,calc(100% - 32px));background:#fffaf2;padding:30px;border-radius:8px;color:#211b18}input{width:100%;box-sizing:border-box;padding:12px;margin:8px 0 14px;border:1px solid #ddd;border-radius:6px}a,button{display:block;text-align:center;width:100%;box-sizing:border-box;padding:12px;border:0;border-radius:6px;background:#211b18;color:white;font-weight:700;text-decoration:none}.hint{color:#6d625c;line-height:1.6}.logo{display:block;max-width:170px;margin:0 auto 18px}</style>
+    <style>body{min-height:100vh;margin:0;display:grid;place-items:center;background:#171313;font-family:Arial,sans-serif}.box{width:min(430px,calc(100% - 32px));background:#fffaf2;padding:30px;border-radius:8px;color:#211b18;box-shadow:0 24px 70px rgba(0,0,0,.25)}label{display:block;font-weight:700;margin:14px 0 6px}input{width:100%;box-sizing:border-box;padding:13px;border:1px solid #ddd;border-radius:6px;background:#fff;color:#211b18;font-size:1rem}button{display:block;text-align:center;width:100%;box-sizing:border-box;margin-top:18px;padding:13px;border:0;border-radius:6px;background:#211b18;color:white;font-weight:700;cursor:pointer}.hint{color:#6d625c;line-height:1.6}.logo{display:block;max-width:170px;margin:0 auto 18px}.error{background:#ffe8e1;color:#8d2315;padding:11px 12px;border-radius:6px;font-weight:700}</style>
   </head>
   <body>
     <div class="box">
       <img class="logo" src="/assets/logo-removebg-preview.png" alt="Asif Raza Perfumes">
       <h1>Admin Login</h1>
-      <p class="hint">Vercel demo mode is enabled for client testing.</p>
-      <p>Email: admin@perfume.test<br>Password: admin12345</p>
-      <a href="/admin">Open Admin Dashboard</a>
+      <p class="hint">Admin dashboard open karne ke liye email aur password zaroori hai.</p>
+      {{ERROR}}
+      <form method="POST" action="/admin/login">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" value="{{EMAIL}}" required autocomplete="username">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password">
+        <button type="submit">Login to Dashboard</button>
+      </form>
     </div>
   </body>
 </html>
-HTML;
+HTML);
+    return;
+}
+
+if ($path === '/admin/logout') {
+    setcookie($adminCookie, '', [
+        'expires' => time() - 3600,
+        'path' => '/',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+
+    header('Location: /admin/login', true, 303);
     return;
 }
 
 if ($path === '/admin' || $path === '/admin/') {
+    if (! $isAdminAuthed) {
+        header('Location: /admin/login', true, 303);
+        return;
+    }
+
     header('Content-Type: text/html; charset=UTF-8');
     echo <<<'HTML'
 <!DOCTYPE html>
@@ -80,6 +132,7 @@ if ($path === '/admin' || $path === '/admin/') {
         <a href="/products">Products</a>
         <a href="/contact">Messages</a>
         <a href="/">View Site</a>
+        <a href="/admin/logout">Logout</a>
       </aside>
       <main class="main">
         <h1>Admin Dashboard</h1>
