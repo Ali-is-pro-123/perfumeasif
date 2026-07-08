@@ -71,7 +71,7 @@
           <p>{{ $product->description }}</p>
           <div class="slider-card-footer">
             <strong>${{ number_format($product->price, 0) }}</strong>
-            <a href="{{ route('products.show', $product) }}">View</a>
+            <a href="{{ route('products.show', $product->slug) }}">View</a>
           </div>
         </article>
       @endforeach

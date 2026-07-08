@@ -18,14 +18,21 @@
       <h1>{{ $product->name }}</h1>
       <p class="detail-price">${{ number_format($product->price, 0) }}</p>
       <p class="detail-description">{{ $product->description }}</p>
-      <form class="detail-cart-form" method="POST" action="{{ route('cart.add', $product) }}">
-        @csrf
-        <label>Quantity<input name="quantity" type="number" min="1" max="20" value="1"></label>
-        <button class="wide-button add-button-detail" type="submit">
+      @if($product->exists)
+        <form class="detail-cart-form" method="POST" action="{{ route('cart.add', $product) }}">
+          @csrf
+          <label>Quantity<input name="quantity" type="number" min="1" max="20" value="1"></label>
+          <button class="wide-button add-button-detail" type="submit">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14" /><path d="M5 12h14" /></svg>
+            <span>Add to cart</span>
+          </button>
+        </form>
+      @else
+        <a class="wide-button add-button-detail" href="{{ route('contact') }}">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14" /><path d="M5 12h14" /></svg>
-          <span>Add to cart</span>
-        </button>
-      </form>
+          <span>Order inquiry</span>
+        </a>
+      @endif
       <div class="detail-accordion">
         <details open><summary>Fragrance notes</summary><p>{{ $product->notes }}</p></details>
         <details><summary>Size</summary><p>{{ $product->size }}</p></details>
