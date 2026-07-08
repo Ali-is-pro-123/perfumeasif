@@ -7,6 +7,7 @@ if (($_ENV['VERCEL'] ?? getenv('VERCEL')) || ($_ENV['APP_ENV'] ?? getenv('APP_EN
         'APP_KEY' => 'base64:u6b+n+/T7RkLd0oXz1Czw+YAl6S1xJS1WMFbZl7XiBQ=',
         'APP_DEBUG' => 'false',
         'APP_URL' => 'https://perfumeasif.vercel.app',
+        'ASSET_URL' => 'https://perfumeasif.vercel.app',
         'DB_CONNECTION' => 'sqlite',
         'DB_DATABASE' => __DIR__.'/../database/database.sqlite',
         'SESSION_DRIVER' => 'cookie',
