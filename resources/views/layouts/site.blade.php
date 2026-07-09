@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('site.css') }}?v=3" />
+    <link rel="stylesheet" href="{{ asset('site.css') }}?v=4" />
   </head>
   <body class="@yield('body_class')">
     <div class="announcement-bar">
@@ -22,7 +22,12 @@
       <a class="brand" href="{{ route('home') }}" aria-label="Aurele home">
         <img class="brand-logo" src="{{ asset('assets/logo-removebg-preview.png') }}" alt="Asif Raza Perfumes">
       </a>
-      <nav class="nav-links" aria-label="Primary navigation">
+      <button class="site-menu-toggle" type="button" data-site-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-links" id="primary-navigation" data-site-menu aria-label="Primary navigation">
         <a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
         <a class="{{ request()->routeIs('products*') ? 'active' : '' }}" href="{{ route('products') }}">Products</a>
         <a class="{{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
@@ -87,6 +92,6 @@
         </nav>
       </div>
     </footer>
-    <script src="{{ asset('site.js') }}?v=3"></script>
+    <script src="{{ asset('site.js') }}?v=4"></script>
   </body>
 </html>

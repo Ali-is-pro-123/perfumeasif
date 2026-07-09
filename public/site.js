@@ -1,5 +1,7 @@
 const detailAddButton = document.querySelector(".add-button-detail");
 const siteHeader = document.querySelector(".site-header");
+const siteMenuToggle = document.querySelector("[data-site-menu-toggle]");
+const siteMenu = document.querySelector("[data-site-menu]");
 const scentSlider = document.querySelector("[data-scent-slider]");
 const sliderPrev = document.querySelector("[data-slider-prev]");
 const sliderNext = document.querySelector("[data-slider-next]");
@@ -11,6 +13,27 @@ const updateHeader = () => {
 
 updateHeader();
 window.addEventListener("scroll", updateHeader, { passive: true });
+
+siteMenuToggle?.addEventListener("click", () => {
+  const isOpen = siteHeader?.classList.toggle("menu-open") ?? false;
+  siteMenuToggle.setAttribute("aria-expanded", String(isOpen));
+  siteMenuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+});
+
+siteMenu?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    siteHeader?.classList.remove("menu-open");
+    siteMenuToggle?.setAttribute("aria-expanded", "false");
+    siteMenuToggle?.setAttribute("aria-label", "Open menu");
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  siteHeader?.classList.remove("menu-open");
+  siteMenuToggle?.setAttribute("aria-expanded", "false");
+  siteMenuToggle?.setAttribute("aria-label", "Open menu");
+});
 
 detailAddButton?.addEventListener("click", () => {
   const label = detailAddButton.querySelector("span");
