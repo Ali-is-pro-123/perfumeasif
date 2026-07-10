@@ -13,12 +13,16 @@
   <div class="product-footer">
     <strong>${{ number_format($product->price, 0) }}</strong>
     <span>{{ $product->size }}</span>
-    <a class="add-to-cart-link" href="{{ route('products.show', $product) }}" aria-label="Open {{ $product->name }} details to add to cart">
+    <form method="POST" action="{{ route('cart.add', $product) }}" class="card-cart-form">
+      @csrf
+      <input type="hidden" name="quantity" value="1">
+      <button class="add-to-cart-link" type="submit" aria-label="Add {{ $product->name }} to cart">
       <svg aria-hidden="true" viewBox="0 0 24 24">
         <path d="M12 5v14" />
         <path d="M5 12h14" />
       </svg>
       <span>Add to cart</span>
-    </a>
+      </button>
+    </form>
   </div>
 </article>

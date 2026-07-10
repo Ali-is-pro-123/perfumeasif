@@ -42,7 +42,11 @@
       <p class="eyebrow">Order summary</p>
       <div><span>Subtotal</span><strong>${{ number_format($total, 0) }}</strong></div>
       <div><span>Shipping</span><strong>Calculated later</strong></div>
-      <a class="wide-button" href="{{ route('contact') }}">Request checkout</a>
+      @if(count($items))
+        <a class="wide-button" href="{{ route('checkout') }}">Checkout order</a>
+      @else
+        <a class="wide-button" href="{{ route('products') }}">Shop products</a>
+      @endif
     </aside>
   </section>
 </main>

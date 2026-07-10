@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,8 +19,11 @@ class AdminController extends Controller
             'productsCount' => Product::count(),
             'categoriesCount' => Category::count(),
             'messagesCount' => ContactMessage::count(),
+            'ordersCount' => Order::count(),
+            'pendingOrders' => Order::where('status', 'pending')->count(),
             'unreadMessages' => ContactMessage::where('is_read', false)->count(),
             'latestMessages' => ContactMessage::latest()->take(5)->get(),
+            'latestOrders' => Order::latest()->take(5)->get(),
         ]);
     }
 
@@ -74,6 +78,53 @@ class AdminController extends Controller
         return view('admin.messages', [
             'messages' => ContactMessage::latest()->get(),
         ]);
+    }
+
+    public function orders(Request $request): View
+    {
+        $orders = Order::with('items')->latest();
+        $period = $request->query('period', 'all');
+        $status = $request->query('status');
+
+        if ($status) {
+            $orders->where('status', $status);
+        }
+
+        match ($period) {
+            'today' => $orders->whereDate('created_at', today()),
+            'week' => $orders->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]),
+            'month' => $orders->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]),
+            'custom' => $this->applyCustomOrderDates($orders, $request),
+            default => null,
+        };
+
+        $filteredOrders = $orders->get();
+
+        return view('admin.orders.index', [
+            'orders' => $filteredOrders,
+            'statuses' => Order::STATUSES,
+            'period' => $period,
+            'status' => $status,
+            'from' => $request->query('from'),
+            'to' => $request->query('to'),
+            'report' => [
+                'count' => $filteredOrders->count(),
+                'total' => $filteredOrders->sum('total'),
+                'pending' => $filteredOrders->where('status', 'pending')->count(),
+                'completed' => $filteredOrders->where('status', 'completed')->count(),
+            ],
+        ]);
+    }
+
+    public function updateOrder(Request $request, Order $order): RedirectResponse
+    {
+        $data = $request->validate([
+            'status' => ['required', 'in:' . implode(',', Order::STATUSES)],
+        ]);
+
+        $order->update($data);
+
+        return back()->with('success', 'Order status updated.');
     }
 
     public function categories(): View
@@ -157,5 +208,16 @@ class AdminController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         return $data;
+    }
+
+    private function applyCustomOrderDates($orders, Request $request): void
+    {
+        if ($request->filled('from')) {
+            $orders->whereDate('created_at', '>=', $request->date('from'));
+        }
+
+        if ($request->filled('to')) {
+            $orders->whereDate('created_at', '<=', $request->date('to'));
+        }
     }
 }

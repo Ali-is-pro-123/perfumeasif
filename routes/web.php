@@ -16,6 +16,9 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::patch('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/{product}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::post('/checkout', [CartController::class, 'storeOrder'])->name('checkout.store');
+Route::get('/checkout/thank-you/{order}', [CartController::class, 'thankYou'])->name('checkout.thank-you');
 
 Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('admin.login');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.submit');
@@ -35,5 +38,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/categories/{category}/edit', [AdminController::class, 'editCategory'])->name('categories.edit');
     Route::put('/categories/{category}', [AdminController::class, 'updateCategory'])->name('categories.update');
     Route::delete('/categories/{category}', [AdminController::class, 'deleteCategory'])->name('categories.delete');
+    Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
+    Route::patch('/orders/{order}', [AdminController::class, 'updateOrder'])->name('orders.update');
     Route::get('/messages', [AdminController::class, 'messages'])->name('messages');
 });

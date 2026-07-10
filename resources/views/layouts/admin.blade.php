@@ -30,8 +30,10 @@
           <a class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard <span>01</span></a>
           <a class="{{ request()->routeIs('admin.products*') ? 'active' : '' }}" href="{{ route('admin.products') }}">Products <span>02</span></a>
           <a class="{{ request()->routeIs('admin.categories*') ? 'active' : '' }}" href="{{ route('admin.categories') }}">Categories <span>03</span></a>
-          <a class="{{ request()->routeIs('admin.messages') ? 'active' : '' }}" href="{{ route('admin.messages') }}">Messages <span>04</span></a>
-          <a href="{{ route('home') }}">View Site <span>↗</span></a>
+          <a class="{{ request()->routeIs('admin.orders') ? 'active' : '' }}" href="{{ route('admin.orders') }}">Orders <span>04</span></a>
+          <a class="{{ request()->routeIs('admin.messages') ? 'active' : '' }}" href="{{ route('admin.messages') }}">Messages <span>05</span></a>
+          <a href="{{ route('cart') }}">Cart <span>06</span></a>
+          <a href="{{ route('home') }}">View Site <span>07</span></a>
         </nav>
         <div class="side-footer">
           <form method="POST" action="{{ route('admin.logout') }}">@csrf<button type="submit">Logout</button></form>
