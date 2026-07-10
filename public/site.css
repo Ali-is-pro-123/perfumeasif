@@ -3270,4 +3270,24 @@ select {
     border-color: rgba(255, 250, 242, 0.32) !important;
     background: rgba(255, 255, 255, 0.08) !important;
   }
+
+  body .nav-links,
+  body.inner-page .nav-links,
+  body .site-header.is-scrolled .nav-links {
+    color: var(--white) !important;
+    background: #151313 !important;
+    border-color: rgba(255, 250, 242, 0.14) !important;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34) !important;
+  }
+
+  body .nav-links a {
+    color: rgba(255, 250, 242, 0.84) !important;
+    background: transparent !important;
+  }
+
+  body .nav-links a.active,
+  body .nav-links a:hover {
+    color: var(--white) !important;
+    background: rgba(255, 250, 242, 0.12) !important;
+  }
 }
