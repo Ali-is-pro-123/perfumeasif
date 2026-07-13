@@ -54,6 +54,7 @@
     <div class="quick-list">
       <a href="{{ route('admin.products.create') }}"><strong>Add new perfume</strong><span>+</span></a>
       <a href="{{ route('admin.categories.create') }}"><strong>Add new category</strong><span>+</span></a>
+      <a href="{{ route('admin.orders') }}"><strong>Process orders</strong><span>→</span></a>
       <a href="{{ route('admin.products') }}"><strong>Edit product images</strong><span>→</span></a>
       <a href="{{ route('admin.messages') }}"><strong>Read messages</strong><span>→</span></a>
     </div>

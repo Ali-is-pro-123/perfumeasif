@@ -11,6 +11,145 @@
       *{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;background:#f4efe7;color:#211b18;font-family:Inter,Arial,sans-serif}.admin{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#171313,#261c17);color:#fff;padding:26px 22px;display:flex;flex-direction:column;gap:22px}.admin-brand{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.12)}.admin-brand img{width:70px;height:46px;object-fit:contain}.admin-brand strong{display:block;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase}.admin-brand span{color:rgba(255,255,255,.62);font-size:.78rem}.side nav{display:grid;gap:8px}.side a,.side button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:44px;color:rgba(255,255,255,.76);text-decoration:none;background:transparent;border:0;border-radius:8px;padding:0 12px;font:inherit;font-weight:800;cursor:pointer}.side a:hover,.side a.active,.side button:hover{color:#fff;background:rgba(255,255,255,.1)}.side-footer{margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}.main{min-width:0;padding:28px clamp(18px,4vw,44px) 44px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:26px}.topbar p{margin:6px 0 0;color:#796d63}.topbar h1{margin:0;font-size:clamp(1.9rem,3vw,3rem);line-height:1}.topbar-actions{display:flex;gap:10px;flex-wrap:wrap}.card{background:#fffaf2;border:1px solid rgba(33,27,24,.1);border-radius:10px;padding:22px;box-shadow:0 18px 44px rgba(35,28,24,.06);margin-bottom:18px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.stat-card{position:relative;overflow:hidden;min-height:150px}.stat-card:after{content:"";position:absolute;right:-34px;top:-34px;width:120px;height:120px;border-radius:50%;background:rgba(190,140,60,.12)}.stat-card span{color:#a66e31;font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.stat-card strong{display:block;margin-top:18px;font-size:3rem;line-height:1}.stat-card p{margin:8px 0 0;color:#796d63}.panel-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:16px}.quick-list{display:grid;gap:10px}.quick-list a,.message-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid rgba(33,27,24,.08);border-radius:8px;background:#fff}.message-row{align-items:flex-start}.message-row p{margin:4px 0 0;color:#796d63}.message-row small,.muted{color:#8d8178}.btn,button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;background:#211b18;color:#fff;border:0;border-radius:8px;padding:0 14px;text-decoration:none;font-weight:900;cursor:pointer}.btn.light{color:#211b18;background:#fff;border:1px solid rgba(33,27,24,.12)}.danger{background:#9f2d2d}.table-wrap{overflow:auto;border:1px solid rgba(33,27,24,.1);border-radius:10px;background:#fffaf2;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;min-width:720px}th,td{border-bottom:1px solid rgba(33,27,24,.08);padding:14px;text-align:left}th{color:#796d63;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}tr:last-child td{border-bottom:0}.badge{display:inline-flex;min-height:26px;align-items:center;border-radius:999px;padding:0 10px;background:#eee6dc;color:#5f4b3d;font-size:.75rem;font-weight:900}.badge.on{background:#e7d3a4;color:#3a2a15}.actions{display:flex;gap:8px;flex-wrap:wrap}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.form-grid .full{grid-column:1/-1}label{display:grid;gap:7px;color:#5f4f45;font-size:.86rem;font-weight:900}input:not([type=checkbox]),textarea,select{width:100%;padding:12px 13px;border:1px solid rgba(33,27,24,.14);border-radius:8px;background:#fff;color:#211b18}textarea{min-height:130px;resize:vertical}.check-row{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid rgba(33,27,24,.1);border-radius:8px;background:#fff}.check-row input{width:auto}.alert{border-color:rgba(166,110,49,.25);background:#fff4df;color:#5b3f20}.message-list{display:grid;gap:14px}.message-card h3{display:flex;justify-content:space-between;gap:12px;margin:0 0 12px}.message-card p{color:#5f4f45;line-height:1.7}.empty{padding:26px;text-align:center;color:#796d63}.brand-gold{color:#d7a849}.admin-menu-toggle{display:none;position:fixed;z-index:80;top:12px;right:12px;width:44px;height:44px;padding:0;flex-direction:column;gap:4px;background:#211b18;box-shadow:0 14px 34px rgba(0,0,0,.22)}.admin-menu-toggle span{display:block;width:18px;height:2px;border-radius:999px;background:#fff}@media(max-width:980px){.admin{display:block;min-height:100vh}.admin-menu-toggle{display:inline-flex}.side{position:fixed;z-index:70;inset:0 auto 0 0;width:min(82vw,320px);height:100vh;transform:translateX(-105%);transition:transform 180ms ease;box-shadow:20px 0 70px rgba(0,0,0,.26);overflow-y:auto}.admin.menu-open .side{transform:translateX(0)}.main{padding:74px 16px 34px}.side nav{grid-template-columns:1fr}.panel-grid,.grid,.form-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.topbar-actions,.actions{width:100%}.topbar-actions .btn,.actions .btn,.actions button{flex:1 1 180px}table{min-width:620px}}@media(max-width:560px){.main{padding:72px 12px 30px}.card{padding:16px;border-radius:8px}.side{width:min(88vw,310px)}.admin-brand img{width:62px}.stat-card{min-height:130px}.stat-card strong{font-size:2.25rem}.quick-list a,.message-row{align-items:flex-start;flex-direction:column}.message-card h3{display:grid}.form-grid{gap:12px}.btn,button{width:100%}table{min-width:560px}th,td{padding:12px 10px}}
       .admin,.main,.card,.quick-list a,.message-row,.topbar,.table-wrap{max-width:100%;min-width:0}.main{overflow:hidden}.grid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.panel-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.quick-list a strong,.message-row strong,.card p{overflow-wrap:anywhere}.admin-brand{min-width:0}.admin-brand div{min-width:0}.admin-brand strong,.admin-brand span{overflow:hidden;text-overflow:ellipsis}@media(max-width:1280px){.admin{display:block;min-height:100vh}.admin-menu-toggle{display:inline-flex}.side{position:fixed;z-index:70;inset:0 auto 0 0;width:min(84vw,320px);height:100dvh;transform:translateX(-105%);transition:transform 180ms ease;box-shadow:20px 0 70px rgba(0,0,0,.28);overflow-y:auto}.admin.menu-open .side{transform:translateX(0)}.main{width:100%;padding:74px clamp(12px,3vw,28px) 34px}.panel-grid,.form-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.topbar-actions,.actions{width:100%}.topbar-actions .btn,.actions .btn,.actions button{flex:1 1 180px}}@media(max-width:760px){.grid{grid-template-columns:1fr}.panel-grid{grid-template-columns:1fr}.card{padding:16px;border-radius:8px}.quick-list a,.message-row{align-items:flex-start;flex-direction:column}.stat-card strong{font-size:2.25rem}.table-wrap{max-width:calc(100vw - 24px)}table{min-width:560px}}
     </style>
+    <style>
+      /* Final admin responsive guard: prevents masked/cropped dashboard panels. */
+      .admin,
+      .main,
+      .side,
+      .card,
+      .table-wrap,
+      .quick-list a,
+      .message-row {
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .admin {
+        overflow-x: clip;
+      }
+
+      .main {
+        width: 100%;
+        overflow-x: clip;
+      }
+
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+      }
+
+      .panel-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+        align-items: stretch;
+      }
+
+      .panel-grid > .card {
+        min-height: 0;
+        height: auto;
+      }
+
+      .card {
+        overflow: hidden;
+      }
+
+      .card h1,
+      .card h2,
+      .card h3,
+      .card p,
+      .quick-list a strong,
+      .message-row strong,
+      .message-row p {
+        overflow-wrap: anywhere;
+      }
+
+      .admin img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      @media (min-width: 1281px) {
+        .admin {
+          grid-template-columns: 280px minmax(0, 1fr) !important;
+        }
+
+        .side {
+          position: sticky;
+          top: 0;
+          height: 100dvh;
+          overflow-y: auto;
+        }
+
+        .main {
+          max-width: calc(100vw - 280px);
+          padding-left: clamp(18px, 3vw, 44px);
+          padding-right: clamp(18px, 3vw, 44px);
+        }
+      }
+
+      @media (max-width: 1280px) {
+        .admin {
+          display: block !important;
+        }
+
+        .side {
+          position: fixed !important;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: min(86vw, 320px) !important;
+          height: 100dvh !important;
+          overflow-y: auto !important;
+          transform: translateX(-105%);
+          transition: transform 0.25s ease;
+          z-index: 50;
+        }
+
+        .admin.menu-open .side {
+          transform: translateX(0) !important;
+        }
+
+        .admin-menu-toggle {
+          display: inline-flex !important;
+        }
+
+        .main {
+          max-width: 100vw !important;
+          padding: 76px clamp(12px, 3vw, 28px) 34px !important;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .panel-grid,
+        .grid {
+          grid-template-columns: 1fr !important;
+        }
+
+        .card {
+          padding: 16px !important;
+        }
+
+        .quick-list a,
+        .message-row {
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .main {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+        }
+
+        .topbar,
+        .quick-list a,
+        .message-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+    </style>
   </head>
   <body>
     <button class="admin-menu-toggle" type="button" data-admin-menu-toggle aria-controls="admin-sidebar" aria-expanded="false" aria-label="Open admin menu">
