@@ -70,20 +70,39 @@
 
       @media (min-width: 1281px) {
         .admin {
+          position: relative;
           grid-template-columns: 280px minmax(0, 1fr) !important;
+          align-items: stretch;
+        }
+
+        .admin::before {
+          content: "";
+          position: fixed;
+          inset: 0 auto 0 0;
+          width: 280px;
+          background: linear-gradient(180deg, #171313, #261c17);
+          z-index: 0;
         }
 
         .side {
           position: sticky;
           top: 0;
-          height: 100dvh;
+          min-height: 100dvh;
+          height: auto;
           overflow-y: auto;
+          z-index: 1;
         }
 
         .main {
+          position: relative;
+          z-index: 1;
           max-width: calc(100vw - 280px);
           padding-left: clamp(18px, 3vw, 44px);
           padding-right: clamp(18px, 3vw, 44px);
+        }
+
+        .panel-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
         }
       }
 
