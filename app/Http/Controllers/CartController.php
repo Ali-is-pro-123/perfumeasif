@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Services\OrderMailer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +90,7 @@ class CartController extends Controller
         });
 
         $request->session()->forget('cart');
+        app(OrderMailer::class)->sendCustomerConfirmation($order->load('items'));
 
         return redirect()->route('checkout.thank-you', $order)->with('success', 'Order placed successfully.');
     }
