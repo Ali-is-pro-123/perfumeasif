@@ -169,7 +169,58 @@
         }
       }
     </style>
-  </head>
+      <style>
+      /* Polished quick action buttons */
+      .quick-list a {
+        min-height: 52px;
+        color: #211b18 !important;
+        text-decoration: none !important;
+        background: linear-gradient(180deg, #ffffff, #fff8ef) !important;
+        border: 1px solid rgba(33, 27, 24, 0.12) !important;
+        box-shadow: 0 10px 24px rgba(35, 28, 24, 0.06);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      }
+
+      .quick-list a:hover,
+      .quick-list a:focus-visible {
+        color: #211b18 !important;
+        border-color: rgba(166, 110, 49, 0.42) !important;
+        background: #fffaf2 !important;
+        box-shadow: 0 16px 34px rgba(35, 28, 24, 0.12);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      .quick-list a strong {
+        color: inherit;
+        text-decoration: none !important;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
+      }
+
+      .quick-list a span {
+        width: 30px;
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 30px;
+        color: #fff;
+        background: #211b18;
+        border-radius: 999px;
+        font-size: 1rem;
+        line-height: 1;
+        text-decoration: none !important;
+      }
+
+      @media (max-width: 480px) {
+        .quick-list a {
+          min-height: 48px;
+          flex-direction: row !important;
+          align-items: center !important;
+        }
+      }
+    </style>  </head>
   <body>
     <button class="admin-menu-toggle" type="button" data-admin-menu-toggle aria-controls="admin-sidebar" aria-expanded="false" aria-label="Open admin menu">
       <span></span>
